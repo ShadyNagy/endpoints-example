@@ -34,10 +34,9 @@ namespace Ardalis.Endpoints.Examples.Endpoints
         ]
         public override async Task<ActionResult<ListCompanyResponse>> HandleAsync(CancellationToken cancellationToken)
         {
-            var response = new ListCompanyResponse(Guid.NewGuid());
-
             var companies = await _repository.ListAsync(cancellationToken);
 
+            var response = new ListCompanyResponse(Guid.NewGuid());
             response.Companies = _mapper.Map<List<CompanyDto>>(companies);
             response.Count = response.Companies.Count;
 
